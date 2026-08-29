@@ -13,7 +13,7 @@ interface bookData {
    description: string;
    createdAt: Date;
    authorId: string;
-   favoritedBy: any;
+   favoritedBy?: any;
 }
 interface bookProp {
    book: bookData;
