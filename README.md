@@ -32,5 +32,5 @@ Make sure you have Node.js and a database (like PostgreSQL, MySQL, or SQLite) in
 ### 1. Clone the repository
 
 ```bash
-git clone [https://github.com/YOUR_USERNAME/your-repo-name.git](https://github.com/YOUR_USERNAME/your-repo-name.git)
-cd your-repo-name
+git clone [https://github.com/Mohammadev-71/old-books.git)
+cd old-books
