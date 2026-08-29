@@ -1,0 +1,88 @@
+{
+  "navbar": {
+    "title": "Books",
+    "headerLinks": {
+      "home": "Home",
+      "favorites": "Favorites",
+      "profile": "Profile",
+      "share": "Share Book",
+      "login": "Login"
+    }
+  },
+  "book": {
+    "name": "Book Name",
+    "description": "Description",
+    "date": "Date"
+  },
+  "login": {
+    "logo": "Books",
+    "title": "Login",
+    "email-placeholder": "Email",
+    "name-placeholder": "Name",
+    "password-placeholder": "Password",
+    "have-account": "Don't have account?",
+    "create-acc-link": "create account"
+  },
+  "signup": {
+    "logo": "Books",
+    "title": "Signup",
+    "email-placeholder": "Email",
+    "name-placeholder": "Name",
+    "password-placeholder": "Password",
+    "have-account": "Already have account?",
+    "create-acc-link": "login"
+  },
+  "profile": {
+    "buttons": {
+      "edit": "Edit profile",
+      "save": "Save",
+      "cancel": "Cancel",
+      "logout": "Logout"
+    },
+    "fields": {
+      "email": "Email",
+      "membership": "Member Since",
+      "favBooks": "Favorites Books",
+      "myBooks": "My Books",
+      "lang": "Language",
+      "theme": "Theme",
+      "name": "Full Name"
+    },
+    "loading": "Loading...",
+    "errors": {
+      "REQ": "[{field}] can't be empty",
+      "SHORT": "[{field}] must be between 3-10 characters",
+      "UPDATE": "Update error: {message}"
+    }
+  },
+  "bookDetails": {
+    "title": "Title:",
+    "description": "Description:",
+    "location": "Location:",
+    "authName": "Author Name:",
+    "authEmail": "Author Email:",
+    "authPhone": "Author Phone:",
+    "deleteBtn": "Delete"
+  },
+  "ui": {
+    "loginEyebrow": "Welcome back",
+    "loginStatement": "A quiet place for stories worth passing on.",
+    "loginTagline": "Your bookshelf, reimagined",
+    "signupEyebrow": "Join the library",
+    "signupStatement": "Make room for the stories you have not found yet.",
+    "signupTagline": "Read. Share. Repeat.",
+    "shareEyebrow": "Contribute to the library",
+    "shareTitle": "Share a book",
+    "shareDescription": "Give a good story another chapter.",
+    "title": "Title",
+    "description": "Description",
+    "location": "Location",
+    "share": "Share",
+    "cancel": "Cancel",
+    "loginSuccess": "Logged in successfully",
+    "signupSuccess": "Account created successfully",
+    "loading": "Loading...",
+    "arabic": "Arabic",
+    "english": "English"
+  }
+}

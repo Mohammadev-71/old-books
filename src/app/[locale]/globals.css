@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --paper: #f6f1e8;
+  --paper-deep: #ebe2d2;
+  --ink: #182b2a;
+  --muted: #687674;
+  --teal: #0d5551;
+  --coral: #e7795c;
+  --line: rgba(24, 43, 42, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+}
+
+.dark body {
+  background: #122120;
+  color: #f6f1e8;
+}
+
+::selection {
+  background: var(--coral);
+  color: white;
+}

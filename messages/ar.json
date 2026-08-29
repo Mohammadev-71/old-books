@@ -1,0 +1,88 @@
+{
+  "navbar": {
+    "title": "كتب",
+    "headerLinks": {
+      "home": "الرئيسية",
+      "favorites": "المفضلة",
+      "profile": "الملف الشخصي ",
+      "share": "مشاركة كتاب",
+      "login": "تسجيل الدخول"
+    }
+  },
+  "book": {
+    "name": "اسم الكتاب",
+    "description": "الوصف",
+    "date": "التاريخ"
+  },
+  "login": {
+    "logo": "Books",
+    "title": "تسجيل الدحول",
+    "email-placeholder": "الايميل",
+    "name-placeholder": "الاسم",
+    "password-placeholder": "كلمة السر",
+    "have-account": "ليس لديك حساب؟",
+    "create-acc-link": "انشاءحساب"
+  },
+  "signup": {
+    "logo": "Books",
+    "title": "انشاء حساب",
+    "email-placeholder": "الايميل",
+    "name-placeholder": "الاسم",
+    "password-placeholder": "كلمة السر",
+    "have-account": "هل لديك حساب بالفعل؟?",
+    "create-acc-link": "سجل الدخول"
+  },
+  "profile": {
+    "buttons": {
+      "edit": "تعديل الملف الشخصي",
+      "save": "حفظ",
+      "cancel": "الغاء",
+      "logout": "تسجيل الخروج"
+    },
+    "fields": {
+      "email": "البريد الالكتورني ",
+      "membership": "عضو منذ",
+      "favBooks": "الكتب الملفضة ",
+      "myBooks": "كتبي",
+      "lang": "اللغة",
+      "theme": "الوضع",
+      "name": "الاسم الكامل"
+    },
+    "loading": "تحميل...",
+    "errors": {
+      "REQ": "[{field}] لا يمكن ان يكون فارغا ",
+      "SHORT": "[{field}] يحب ان يكون بين 4-10 احرف",
+      "UPDATE": "خطأ في التحديث: {message}"
+    }
+  },
+  "bookDetails": {
+    "title": "العنوان:",
+    "description": "الوصف:",
+    "location": "الموقع:",
+    "authName": "اسم المؤلف:",
+    "authEmail": "ايميل المؤلف:",
+    "authPhone": "رقم المؤلف:",
+    "deleteBtn": "حذف"
+  },
+  "ui": {
+    "loginEyebrow": "مرحبًا بعودتك",
+    "loginStatement": "مساحة هادئة للقصص التي تستحق أن تنتقل إلى الآخرين.",
+    "loginTagline": "مكتبتك، بتصوّر جديد",
+    "signupEyebrow": "انضم إلى المكتبة",
+    "signupStatement": "اترك مساحة للقصص التي لم تجدها بعد.",
+    "signupTagline": "اقرأ. شارك. كرر.",
+    "shareEyebrow": "ساهم في إثراء المكتبة",
+    "shareTitle": "مشاركة كتاب",
+    "shareDescription": "امنح قصة جميلة فصلًا جديدًا.",
+    "title": "العنوان",
+    "description": "الوصف",
+    "location": "الموقع",
+    "share": "مشاركة",
+    "cancel": "إلغاء",
+    "loginSuccess": "تم تسجيل الدخول بنجاح",
+    "signupSuccess": "تم إنشاء الحساب بنجاح",
+    "loading": "جار التحميل...",
+    "arabic": "العربية",
+    "english": "الإنجليزية"
+  }
+}
