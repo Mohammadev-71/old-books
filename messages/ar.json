@@ -1,6 +1,7 @@
 {
   "navbar": {
     "title": "كتب",
+    "navigationLabel": "التنقل الرئيسي",
     "headerLinks": {
       "home": "الرئيسية",
       "favorites": "المفضلة",
@@ -12,7 +13,28 @@
   "book": {
     "name": "اسم الكتاب",
     "description": "الوصف",
-    "date": "التاريخ"
+    "date": "التاريخ",
+    "addFavorite": "أضف إلى المفضلة",
+    "removeFavorite": "أزل من المفضلة",
+    "favoriteError": "تعذر تحديث المفضلة. يرجى المحاولة مرة أخرى."
+  },
+  "library": {
+    "eyebrow": "ركن القراءة",
+    "title": "كتب أُضيفت مؤخرًا",
+    "count": "{count} كتاب",
+    "emptyTitle": "الرفوف بانتظارك",
+    "emptyDescription": "كن أول من يشارك كتابًا وساعد هذه المكتبة الصغيرة على النمو.",
+    "noResultsTitle": "لم نعثر على كتب",
+    "noResultsDescription": "جرّب كلمات بحث أخرى أو تصفح أحدث الكتب."
+  },
+  "collections": {
+    "eyebrow": "مكتبتك",
+    "favoritesTitle": "الكتب المفضلة",
+    "myBooksTitle": "الكتب التي شاركتها",
+    "emptyFavoritesTitle": "ستجد كتبك المفضلة هنا",
+    "emptyFavoritesDescription": "احفظ كتابًا يعجبك لتتمكن من الوصول إليه بسهولة لاحقًا.",
+    "emptyMyBooksTitle": "لم تشارك أي كتاب بعد",
+    "emptyMyBooksDescription": "شارك قصة جميلة لتصل إلى قارئ جديد."
   },
   "login": {
     "logo": "Books",
@@ -56,6 +78,7 @@
     }
   },
   "bookDetails": {
+    "eyebrow": "قصة تستحق المشاركة",
     "title": "العنوان:",
     "description": "الوصف:",
     "location": "الموقع:",
@@ -78,11 +101,17 @@
     "description": "الوصف",
     "location": "الموقع",
     "share": "مشاركة",
+    "shareError": "تعذر مشاركة الكتاب. يرجى المحاولة مرة أخرى.",
+    "shareSuccess": "تمت مشاركة كتابك بنجاح.",
     "cancel": "إلغاء",
     "loginSuccess": "تم تسجيل الدخول بنجاح",
     "signupSuccess": "تم إنشاء الحساب بنجاح",
     "loading": "جار التحميل...",
     "arabic": "العربية",
-    "english": "الإنجليزية"
+    "english": "الإنجليزية",
+    "searchPlaceholder": "ابحث عن الكتب بالعنوان أو الوصف أو الموقع",
+    "searchButton": "بحث",
+    "switchToLight": "التبديل إلى الوضع الفاتح",
+    "switchToDark": "التبديل إلى الوضع الداكن"
   }
 }

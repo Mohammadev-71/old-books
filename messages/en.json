@@ -1,6 +1,7 @@
 {
   "navbar": {
     "title": "Books",
+    "navigationLabel": "Main navigation",
     "headerLinks": {
       "home": "Home",
       "favorites": "Favorites",
@@ -12,7 +13,28 @@
   "book": {
     "name": "Book Name",
     "description": "Description",
-    "date": "Date"
+    "date": "Date",
+    "addFavorite": "Add to favorites",
+    "removeFavorite": "Remove from favorites",
+    "favoriteError": "Could not update favorites. Please try again."
+  },
+  "library": {
+    "eyebrow": "Your reading corner",
+    "title": "Recently shared",
+    "count": "{count} books",
+    "emptyTitle": "The shelves are waiting",
+    "emptyDescription": "Be the first to share a book and help this little library grow.",
+    "noResultsTitle": "No books found",
+    "noResultsDescription": "Try a different search or browse the latest books."
+  },
+  "collections": {
+    "eyebrow": "Your bookshelf",
+    "favoritesTitle": "Favorite books",
+    "myBooksTitle": "Books you shared",
+    "emptyFavoritesTitle": "Your favorites will live here",
+    "emptyFavoritesDescription": "Save a book you love and it will be easy to find again.",
+    "emptyMyBooksTitle": "You have not shared a book yet",
+    "emptyMyBooksDescription": "Pass a good story along and give it a new reader."
   },
   "login": {
     "logo": "Books",
@@ -56,6 +78,7 @@
     }
   },
   "bookDetails": {
+    "eyebrow": "A story worth sharing",
     "title": "Title:",
     "description": "Description:",
     "location": "Location:",
@@ -78,11 +101,17 @@
     "description": "Description",
     "location": "Location",
     "share": "Share",
+    "shareError": "We could not share this book. Please try again.",
+    "shareSuccess": "Your book was shared successfully.",
     "cancel": "Cancel",
     "loginSuccess": "Logged in successfully",
     "signupSuccess": "Account created successfully",
     "loading": "Loading...",
     "arabic": "Arabic",
-    "english": "English"
+    "english": "English",
+    "searchPlaceholder": "Search books by title, description, or location",
+    "searchButton": "Search",
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode"
   }
 }

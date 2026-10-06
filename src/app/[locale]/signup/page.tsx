@@ -7,6 +7,7 @@ import { useLocale } from "next-intl";
 import { usePathname } from "@/src/i18n/navigation";
 import { authClient } from "@/src/lib/auth-client";
 import { useState } from "react";
+import { useRouter } from "@/src/i18n/navigation";
 import { redirect } from "next/navigation";
 
 export default function Signup() {
@@ -21,6 +22,7 @@ export default function Signup() {
     name: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const { data: session } = authClient.useSession();
 
   if (session) {
@@ -36,13 +38,13 @@ export default function Signup() {
         callbackURL: "/profile",
       },
       {
-        onRequest: (ctx) => {
+        onRequest: () => {
           setIsLoading(true);
         },
-        onSuccess: (ctx) => {
+        onSuccess: () => {
           setIsLoading(false);
           alert(ui("signupSuccess"));
-          redirect("/profile");
+          router.push("/profile");
         },
         onError: (ctx) => {
           setIsLoading(false);
@@ -78,29 +80,35 @@ export default function Signup() {
             className="flex flex-col gap-5"
           >
             <input
+              required
+              aria-label={t("email-placeholder")}
               onChange={(e) => {
                 setUserData({ ...userData, email: e.target.value });
               }}
-              className="w-full rounded-xl border border-[var(--line)] bg-[var(--paper)] px-4 py-3 text-base text-[var(--ink)] outline-none transition focus:border-[var(--coral)] dark:bg-[#122120] dark:text-[#f6f1e8]"
-              type="text"
+              className="w-full rounded-xl border border-[var(--line)] bg-[var(--paper)] px-4 py-3 text-base text-[var(--ink)] outline-none transition focus:border-[var(--coral)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--coral)] dark:bg-[#122120] dark:text-[#f6f1e8]"
+              type="email"
               placeholder={t("email-placeholder")}
             />
 
             <input
+              required
+              aria-label={t("name-placeholder")}
               onChange={(e) => {
                 setUserData({ ...userData, name: e.target.value });
               }}
-              className="w-full rounded-xl border border-[var(--line)] bg-[var(--paper)] px-4 py-3 text-base text-[var(--ink)] outline-none transition focus:border-[var(--coral)] dark:bg-[#122120] dark:text-[#f6f1e8]"
+              className="w-full rounded-xl border border-[var(--line)] bg-[var(--paper)] px-4 py-3 text-base text-[var(--ink)] outline-none transition focus:border-[var(--coral)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--coral)] dark:bg-[#122120] dark:text-[#f6f1e8]"
               type="text"
               placeholder={t("name-placeholder")}
             />
 
             <input
+              required
+              aria-label={t("password-placeholder")}
               onChange={(e) => {
                 setUserData({ ...userData, password: e.target.value });
               }}
-              className="w-full rounded-xl border border-[var(--line)] bg-[var(--paper)] px-4 py-3 text-base text-[var(--ink)] outline-none transition focus:border-[var(--coral)] dark:bg-[#122120] dark:text-[#f6f1e8]"
-              type="text"
+              className="w-full rounded-xl border border-[var(--line)] bg-[var(--paper)] px-4 py-3 text-base text-[var(--ink)] outline-none transition focus:border-[var(--coral)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--coral)] dark:bg-[#122120] dark:text-[#f6f1e8]"
+              type="password"
               placeholder={t("password-placeholder")}
             />
 
@@ -115,7 +123,8 @@ export default function Signup() {
 
             <button
               type="submit"
-              className="mt-3 rounded-xl bg-[var(--coral)] px-5 py-3 font-bold text-white transition hover:brightness-110"
+              disabled={isLoading}
+              className="mt-3 min-h-12 rounded-xl bg-[var(--coral)] px-5 font-bold text-white transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--coral)] disabled:cursor-wait disabled:opacity-60"
             >
               {isLoading ? ui("loading") : t("title")}
             </button>

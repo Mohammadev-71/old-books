@@ -1,4 +1,4 @@
-type UserData = Record<string, any>;
+type UserData = Record<string, string>;
 
 export default function DynField({
   type,
@@ -23,10 +23,12 @@ export default function DynField({
       <input
         type={type}
         placeholder={placeholder}
+        value={userData[field] ?? value}
+        aria-label={placeholder}
         onChange={(e) => {
           setUserData({ ...userData, [field]: e.target.value });
         }}
-        className="mt-1 w-full rounded-xl border border-white/30 bg-white/10 px-3 py-2 text-lg text-white outline-none placeholder:text-white/60 focus:border-white"
+        className="mt-1 w-full rounded-xl border border-white/30 bg-white/10 px-3 py-2 text-lg text-white outline-none placeholder:text-white/60 focus:border-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
       />
     </div>
   ) : (

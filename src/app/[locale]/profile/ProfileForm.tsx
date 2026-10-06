@@ -7,13 +7,29 @@ import DynSelect from "../components/DynSelect";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/src/i18n/navigation";
 import { Link as IntLink } from "@/src/i18n/navigation";
+import type { Prisma } from "@/src/generated/prisma/client";
 
-export default function ProfileForm({ initialUser }: { initialUser: any }) {
+type ProfileUser = Prisma.UserGetPayload<{
+  select: {
+    id: true;
+    name: true;
+    email: true;
+    createdAt: true;
+    language: true;
+    theme: true;
+    favBooks: { select: { id: true } };
+    books: { select: { id: true } };
+  };
+}>;
+type ProfileEdits = Partial<Record<"name" | "language" | "theme", string>>;
+type ProfileErrors = Partial<Record<"name" | "save", string>>;
+
+export default function ProfileForm({ initialUser }: { initialUser: ProfileUser }) {
   const [isEdit, setIsEdit] = useState(false);
-  const [userData, setUserData] = useState<{ [key: string]: any }>({});
+  const [userData, setUserData] = useState<ProfileEdits>({});
   const t = useTranslations("profile");
   const router = useRouter();
-  const [errors, setErrors] = useState<{ [key: string]: any }>({});
+  const [errors, setErrors] = useState<ProfileErrors>({});
 
   const saveHandler = async () => {
     setErrors({});
@@ -23,10 +39,8 @@ export default function ProfileForm({ initialUser }: { initialUser: any }) {
     if (userData.name !== undefined) {
       if (!userData.name.trim()) {
         newErrors.name = t("errors.REQ", { field: t("fields.name") });
-        alert(newErrors.name);
       } else if (userData.name.trim().length < 3) {
         newErrors.name = t("errors.SHORT", { field: t("fields.name") });
-        alert(newErrors.name);
       }
     }
 
@@ -35,10 +49,10 @@ export default function ProfileForm({ initialUser }: { initialUser: any }) {
       return;
     }
 
-    const payload: Record<string, any> = {};
+    const payload: ProfileEdits = {};
 
-    if (userData.name && userData.name !== initialUser.name)
-      payload.name = userData.name;
+    if (userData.name !== undefined && userData.name !== initialUser.name)
+      payload.name = userData.name.trim();
     if (userData.language && userData.language !== initialUser.language)
       payload.language = userData.language;
     if (userData.theme && userData.theme !== initialUser.theme)
@@ -49,10 +63,10 @@ export default function ProfileForm({ initialUser }: { initialUser: any }) {
       return;
     }
 
-    const { data, error } = await authClient.updateUser(payload);
+    const { error } = await authClient.updateUser(payload);
 
     if (error) {
-      alert(t("errors.UPDATE", { message: error.message ?? "" }));
+      setErrors({ save: t("errors.UPDATE", { message: error.message ?? "" }) });
     } else {
       setIsEdit(false);
       window.location.reload();
@@ -68,8 +82,6 @@ export default function ProfileForm({ initialUser }: { initialUser: any }) {
       },
     });
   };
-
-  console.log(initialUser);
 
   return (
     <main className="min-h-screen bg-[var(--paper)] px-5 py-10 text-[var(--ink)] dark:bg-[#122120] dark:text-[#f6f1e8] sm:px-8">
@@ -92,11 +104,23 @@ export default function ProfileForm({ initialUser }: { initialUser: any }) {
                   setUserData={setUserData}
                   isEdit={isEdit}
                 />
+                {errors.name && (
+                  <p role="alert" className="text-sm text-red-200">
+                    {errors.name}
+                  </p>
+                )}
               </div>
 
               <div className="flex gap-2">
                 <button
-                  onClick={() => setIsEdit(!isEdit)}
+                  type="button"
+                  onClick={() => {
+                    if (isEdit) {
+                      setUserData({});
+                      setErrors({});
+                    }
+                    setIsEdit(!isEdit);
+                  }}
                   className="rounded-xl border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/20"
                 >
                   {isEdit ? t("buttons.cancel") : t("buttons.edit")}
@@ -104,6 +128,7 @@ export default function ProfileForm({ initialUser }: { initialUser: any }) {
 
                 {isEdit && (
                   <button
+                    type="button"
                     onClick={saveHandler}
                     className="rounded-xl border border-white/30 bg-white px-4 py-2 text-sm font-medium text-[var(--teal)] transition hover:bg-[var(--paper)]"
                   >
@@ -113,6 +138,12 @@ export default function ProfileForm({ initialUser }: { initialUser: any }) {
               </div>
             </div>
           </div>
+
+          {errors.save && (
+            <p role="alert" className="px-6 pb-2 text-sm text-red-700 dark:text-red-300 sm:px-10">
+              {errors.save}
+            </p>
+          )}
 
           <div className="grid gap-4 p-6 sm:grid-cols-2 sm:p-10">
             <div className="rounded-2xl border border-[var(--line)] bg-[var(--paper)] p-5 dark:bg-[#122120]">
@@ -190,6 +221,7 @@ export default function ProfileForm({ initialUser }: { initialUser: any }) {
                 {t("buttons.logout")}
               </p>
               <button
+                type="button"
                 className="font-semibold text-[var(--coral)] hover:underline"
                 onClick={() => {
                   logoutHandler();

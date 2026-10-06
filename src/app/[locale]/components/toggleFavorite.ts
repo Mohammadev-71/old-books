@@ -43,11 +43,12 @@ export async function toggleFavorite({bookId}:{bookId:string}){
             favBooks:{ connect: { id: bookId } },
             },
          });
-         revalidatePath("/")
-         return ({success:true, status:"ADD",FavList:user})
+         revalidatePath("/[locale]", "page")
+         revalidatePath("/[locale]/favorites", "page")
+         return { success: true, status: "ADD" as const }
       } catch (error) {
-         console.log(error)
-         return ({success:false, msg:error})
+         console.error("Failed to add book to favorites", error)
+         return { success: false, msg: "Failed to update favorites" }
       }
       
    // if the book in list remove it:
@@ -59,11 +60,12 @@ export async function toggleFavorite({bookId}:{bookId:string}){
             favBooks:{ disconnect: { id: bookId } }
             },
          });
-         revalidatePath("/")
-         return ({success:true, status:"REMOVE",FavList:user})
+         revalidatePath("/[locale]", "page")
+         revalidatePath("/[locale]/favorites", "page")
+         return { success: true, status: "REMOVE" as const }
       } catch (error) {
-         console.log(error)
-         return ({success:false, msg:error})
+         console.error("Failed to remove book from favorites", error)
+         return { success: false, msg: "Failed to update favorites" }
       }
       
    }

@@ -23,7 +23,7 @@ async function main() {
   ]);
 
 
-  const books = await Promise.all([
+  await Promise.all([
     prisma.book.create({
       data:{
         title:"mohammad samer",

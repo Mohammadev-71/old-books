@@ -22,11 +22,27 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: "Avenir Next", "Segoe UI", sans-serif;
+  text-rendering: optimizeLegibility;
 }
 
 .dark body {
   background: #122120;
   color: #f6f1e8;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+*:focus-visible {
+  outline-color: var(--coral);
 }
 
 ::selection {

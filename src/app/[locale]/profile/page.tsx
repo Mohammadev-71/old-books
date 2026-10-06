@@ -31,5 +31,9 @@ export default async function ProfilePage() {
       }
    })
 
+   if (!userData) {
+      redirect("/login");
+   }
+
    return <ProfileForm initialUser={userData} />;
 }

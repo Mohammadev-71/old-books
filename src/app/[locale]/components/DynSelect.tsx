@@ -1,4 +1,4 @@
-type UserData = Record<string, any>;
+type UserData = Record<string, string>;
 
 export default function DynSelect({
   placeholder,
@@ -21,13 +21,15 @@ export default function DynSelect({
     <div>
       <label>{placeholder}</label>
       <select
+        value={userData[field] ?? value}
+        aria-label={placeholder}
         onChange={(e) => {
           setUserData({ ...userData, [field]: e.target.value });
         }}
-        className="mt-1 w-full rounded-xl border border-[var(--line)] bg-white px-3 py-2 text-base outline-none focus:border-[var(--coral)] dark:bg-[#1b302e] dark:text-[#f6f1e8]"
+        className="mt-1 w-full rounded-xl border border-[var(--line)] bg-white px-3 py-2 text-base outline-none focus:border-[var(--coral)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--coral)] dark:bg-[#1b302e] dark:text-[#f6f1e8]"
       >
-        {options.map((opt, index) => (
-          <option key={index} value={opt}>
+        {options.map((opt) => (
+          <option key={opt} value={opt}>
             {opt}
           </option>
         ))}

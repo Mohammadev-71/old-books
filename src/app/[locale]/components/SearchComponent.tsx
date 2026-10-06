@@ -1,21 +1,25 @@
 "use client";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useRouter, usePathname } from "@/src/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 export default function SearchComponent() {
    const searchParams = useSearchParams();
    const initialQuery = searchParams.get("query") || "";
    const router = useRouter();
    const pathname = usePathname();
-   const [search, setSearch] = useState<string>(initialQuery);
+   const t = useTranslations("ui");
 
-   const searchHandler = () => {
+   const searchHandler = (form: HTMLFormElement) => {
+      const formData = new FormData(form);
+      const search = String(formData.get("query") ?? "").trim();
       const params = new URLSearchParams();
       if (search) {
          params.set("query", search);
       }
 
-      router.push(`${pathname}?${params.toString()}`);
+      const query = params.toString();
+      router.push(query ? `${pathname}?${query}` : pathname);
    };
 
 
@@ -23,23 +27,25 @@ export default function SearchComponent() {
       <form
          onSubmit={(e) => {
          e.preventDefault();
-         searchHandler();
+         searchHandler(e.currentTarget);
          }}
-         className="flex w-full overflow-hidden rounded-full border border-white/20 bg-white/10 shadow-inner shadow-black/10 backdrop-blur-sm"
+         role="search"
+         className="mx-auto flex w-full max-w-2xl overflow-hidden rounded-2xl border border-white/20 bg-white/10 shadow-inner shadow-black/10 backdrop-blur-sm"
       >
          <input
-         onChange={(e) => {
-            setSearch(e.target.value);
-         }}
          type="text"
          name="query"
-         placeholder="Search"
-         className="min-w-0 flex-1 bg-transparent px-5 py-3 text-base text-white placeholder:text-white/60 focus:outline-none"
+         key={initialQuery}
+         defaultValue={initialQuery}
+         placeholder={t("searchPlaceholder")}
+         aria-label={t("searchPlaceholder")}
+         className="min-w-0 flex-1 bg-transparent px-5 py-3 text-base text-white placeholder:text-white/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white"
          />
          <button
-         className="px-5 text-lg text-white transition hover:bg-white/10"
+         className="min-w-14 px-5 text-lg text-white transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-white"
          type="submit"
-         aria-label="Search"
+         aria-label={t("searchButton")}
+         title={t("searchButton")}
          >
          ⌕
          </button>

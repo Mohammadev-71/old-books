@@ -18,70 +18,49 @@ export default function Navbar() {
    }
    
 
-   console.log(pathName)
-
    return (
-      <header className="border-b border-white/10 bg-[var(--teal)] px-5 py-5 text-white shadow-[0_10px_30px_rgba(13,85,81,0.16)] sm:px-8 lg:px-12">
-         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-5">
-         <p className="cursor-pointer font-serif text-2xl font-bold tracking-tight text-[#f6f1e8]">
-            {t("title")}
-         </p>
-         <nav className="order-3 flex w-full items-center justify-center gap-5 text-sm font-semibold sm:order-2 sm:w-auto sm:gap-7">
-            <IntLink href={"/"} locale={locale}>
-               <p
-               className={`relative cursor-pointer after:absolute after:-bottom-2 after:right-0 after:left-0 after:h-0.5 after:bg-[var(--coral)] after:transition-all after:duration-300 ${pathName === "/" ? "after:w-full" : "after:w-0"} hover:after:w-full`}
-               >
-               {t("headerLinks.home")}
-               </p>
+      <header className="border-b border-white/10 bg-[var(--teal)] px-5 py-4 text-white shadow-[0_10px_30px_rgba(13,85,81,0.16)] sm:px-8 lg:px-12">
+         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-4">
+            <IntLink
+               href="/"
+               locale={locale}
+               className="font-serif text-2xl font-bold tracking-tight text-[#f6f1e8] focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            >
+               {t("title")}
             </IntLink>
-
-            <IntLink href={"/favorites"}>
-               <p
-               className={`relative cursor-pointer after:absolute after:-bottom-2 after:right-0 after:left-0 after:h-0.5 after:bg-[var(--coral)] after:transition-all after:duration-300 ${pathName === "/favorites" ? "after:w-full" : "after:w-0"} hover:after:w-full`}
-               >
-               {t("headerLinks.favorites")}
-               </p>
-            </IntLink>
-
-            <IntLink href={"/share-book"}>
-               <p
-               className={`relative cursor-pointer after:absolute after:-bottom-2 after:right-0 after:left-0 after:h-0.5 after:bg-[var(--coral)] after:transition-all after:duration-300 ${pathName === "/share-book" ? "after:w-full" : "after:w-0"} hover:after:w-full`}
-               >
-               {t("headerLinks.share")}
-               </p>
-            </IntLink>
-
-            <IntLink href={"/profile"}>
-               <p
-               className={`relative cursor-pointer after:absolute after:-bottom-2 after:right-0 after:left-0 after:h-0.5 after:bg-[var(--coral)] after:transition-all after:duration-300 ${pathName === "/profile" ? "after:w-full" : "after:w-0"} hover:after:w-full`}
-               >
-               {t("headerLinks.profile")}
-               </p>
-            </IntLink>
-
-            <IntLink href={"/login"}>
-               <p
-               className={`relative cursor-pointer after:absolute after:-bottom-2 after:right-0 after:left-0 after:h-0.5 after:bg-[var(--coral)] after:transition-all after:duration-300 ${pathName === "/login" ? "after:w-full" : "after:w-0"} hover:after:w-full`}
-               >
-               {t("headerLinks.login")}
-               </p>
-            </IntLink>
-         </nav>
-
-         <div className="order-2 flex items-center gap-2 sm:order-3">
-            <ThemeSwitcher isAction={true} />
-
-            <LanguageSwitcher isAction={true} />
+            <nav
+               aria-label={t("navigationLabel")}
+               className="order-3 flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-3 text-sm font-semibold sm:order-2 sm:w-auto sm:gap-x-6"
+            >
+               {[
+                  ["/", "home"],
+                  ["/favorites", "favorites"],
+                  ["/share-book", "share"],
+                  ["/profile", "profile"],
+                  ["/login", "login"],
+               ].map(([href, label]) => (
+                  <IntLink
+                     key={href}
+                     href={href}
+                     aria-current={pathName === href ? "page" : undefined}
+                     className={`relative py-1 after:absolute after:-bottom-1 after:inset-x-0 after:h-0.5 after:bg-[var(--coral)] after:transition-transform after:duration-300 ${
+                        pathName === href ? "after:scale-x-100" : "after:scale-x-0"
+                     } hover:after:scale-x-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white`}
+                  >
+                     {t(`headerLinks.${label}`)}
+                  </IntLink>
+               ))}
+            </nav>
+            <div className="order-2 ms-auto flex items-center gap-2 sm:order-3 sm:ms-0">
+               <ThemeSwitcher isAction />
+               <LanguageSwitcher isAction />
+            </div>
          </div>
-         </div>
-         <div className="mx-auto mt-7 max-w-3xl">
-            
-            {
-               
-               pathName==="/profile"?null:<SearchComponent />
-            }
-            
-         </div>
+         {pathName !== "/profile" && (
+            <div className="mx-auto mt-4 max-w-7xl">
+               <SearchComponent />
+            </div>
+         )}
       </header>
    );
 }

@@ -48,10 +48,13 @@ export default async function deleteBookHandler({bookId}:{bookId:string}){
       await prisma.book.delete({
          where:{id:bookId}
       })
-      revalidatePath("/myBooks")
+      revalidatePath("/[locale]", "page")
+      revalidatePath("/[locale]/favorites", "page")
+      revalidatePath("/[locale]/myBooks", "page")
+      revalidatePath("/[locale]/book/[id]", "page")
       return ({success:true, msg:"Book Deleted Successfully"})
    } catch (error) {
-      console.log(error)
+      console.error("Failed to delete book", error)
       return { success: false, msg: "Failed to delete the book" }
       
    }  

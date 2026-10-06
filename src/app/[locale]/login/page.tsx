@@ -6,7 +6,7 @@ import { usePathname } from "@/src/i18n/navigation";
 import { useLocale } from "next-intl";
 import { Link as IntLink } from "@/src/i18n/navigation";
 import { authClient } from "@/src/lib/auth-client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { redirect } from "next/navigation";
 
 export default function LoginPage() {
@@ -36,10 +36,10 @@ export default function LoginPage() {
         callbackURL: "/profile",
       },
       {
-        onRequest: (ctx) => {
+        onRequest: () => {
           setIsLoading(true);
         },
-        onSuccess(ctx) {
+        onSuccess() {
           setIsLoading(false);
           alert(ui("loginSuccess"));
         },
@@ -50,8 +50,6 @@ export default function LoginPage() {
       },
     );
   };
-
-  useEffect(() => {}, []);
 
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[var(--paper)] px-5 py-10 dark:bg-[#122120] sm:px-8">
@@ -87,19 +85,23 @@ export default function LoginPage() {
             className="flex flex-col gap-5"
           >
             <input
+              required
+              aria-label={t("email-placeholder")}
               onChange={(e) => {
                 setUserData({ ...userData, email: e.target.value });
               }}
-              className="w-full rounded-xl border border-[var(--line)] bg-[var(--paper)] px-4 py-3 text-base text-[var(--ink)] outline-none transition focus:border-[var(--coral)] dark:bg-[#122120] dark:text-[#f6f1e8]"
-              type="text"
+              className="w-full rounded-xl border border-[var(--line)] bg-[var(--paper)] px-4 py-3 text-base text-[var(--ink)] outline-none transition focus:border-[var(--coral)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--coral)] dark:bg-[#122120] dark:text-[#f6f1e8]"
+              type="email"
               placeholder={t("email-placeholder")}
             />
             <input
+              required
+              aria-label={t("password-placeholder")}
               onChange={(e) => {
                 setUserData({ ...userData, password: e.target.value });
               }}
-              className="w-full rounded-xl border border-[var(--line)] bg-[var(--paper)] px-4 py-3 text-base text-[var(--ink)] outline-none transition focus:border-[var(--coral)] dark:bg-[#122120] dark:text-[#f6f1e8]"
-              type="text"
+              className="w-full rounded-xl border border-[var(--line)] bg-[var(--paper)] px-4 py-3 text-base text-[var(--ink)] outline-none transition focus:border-[var(--coral)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--coral)] dark:bg-[#122120] dark:text-[#f6f1e8]"
+              type="password"
               placeholder={t("password-placeholder")}
             />
             <div className="text-sm text-[var(--muted)]">
@@ -113,7 +115,8 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="mt-3 rounded-xl bg-[var(--coral)] px-5 py-3 font-bold text-white transition hover:brightness-110"
+              disabled={isLoading}
+              className="mt-3 min-h-12 rounded-xl bg-[var(--coral)] px-5 font-bold text-white transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--coral)] disabled:cursor-wait disabled:opacity-60"
             >
               {isLoading ? ui("loading") : t("title")}
             </button>

@@ -5,9 +5,8 @@ import { useLocale } from "next-intl";
 import { authClient } from "@/src/lib/auth-client";
 import { useEffect } from "react";
 
-export default function LanguageSwitcher({ isAction }: { isAction: Boolean }) {
+export default function LanguageSwitcher({ isAction }: { isAction: boolean }) {
   const locale = useLocale();
-  const t = useTranslations("navbar");
   const ui = useTranslations("ui");
   const pathName = usePathname();
   const router = useRouter();
@@ -18,12 +17,15 @@ export default function LanguageSwitcher({ isAction }: { isAction: Boolean }) {
   useEffect(() => {
     const checkUserLanguage = () => {
       if (!isAction && session?.user) {
-        router.replace(pathName, { locale: session?.user?.language });
+        const preferredLocale = session.user.language;
+        if (preferredLocale) {
+          router.replace(pathName, { locale: preferredLocale });
+        }
         return null;
       }
     };
     checkUserLanguage();
-  }, [session, pathName, router]);
+  }, [isAction, session, pathName, router]);
 
   if (!isAction) {
     return;
@@ -34,7 +36,7 @@ export default function LanguageSwitcher({ isAction }: { isAction: Boolean }) {
       <IntLink
         href={pathName}
         locale={nextLocale}
-        className="rounded-xl bg-[var(--coral)] px-5 py-3 font-bold text-white transition hover:brightness-110"
+        className="inline-flex h-11 items-center rounded-xl border border-white/25 bg-white/10 px-4 text-sm font-semibold text-white transition hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
       >
         {locale === "en" ? ui("arabic") : ui("english")}
       </IntLink>
